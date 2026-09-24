@@ -1,13 +1,13 @@
 const puzzle = {
   size: 10,
   words: [
-    { id: 1, number: 1, direction: 'across', row: 1, col: 1, answer: 'CODIGO', clue: 'Conjunto de instruções escritas para um computador.' },
-    { id: 2, number: 2, direction: 'down', row: 1, col: 3, answer: 'DADOS', clue: 'Informações que podem ser armazenadas e processadas.' },
-    { id: 3, number: 3, direction: 'down', row: 1, col: 6, answer: 'ONLINE', clue: 'Estado de quem está conectado à internet.' },
-    { id: 4, number: 4, direction: 'across', row: 3, col: 3, answer: 'ALGORITMO', clue: 'Sequência lógica de passos para resolver um problema.' },
-    { id: 5, number: 5, direction: 'down', row: 3, col: 8, answer: 'ROBOT', clue: 'Máquina programável capaz de executar tarefas.' },
-    { id: 6, number: 6, direction: 'across', row: 6, col: 1, answer: 'INTERNET', clue: 'Rede mundial que conecta computadores e dispositivos.' },
-    { id: 7, number: 7, direction: 'across', row: 8, col: 4, answer: 'NUVEM', clue: 'Forma de armazenar e acessar arquivos pela internet.' }
+    { id: 1, number: 1, direction: 'across', row: 0, col: 0, answer: 'DADOS', clue: 'Informações que podem ser armazenadas e processadas.' },
+    { id: 2, number: 2, direction: 'down', row: 0, col: 1, answer: 'ALGORITMO', clue: 'Sequência lógica de passos para resolver um problema.' },
+    { id: 3, number: 3, direction: 'down', row: 0, col: 7, answer: 'ONLINE', clue: 'Estado de quem está conectado à internet.' },
+    { id: 4, number: 4, direction: 'across', row: 3, col: 0, answer: 'CODIGO', clue: 'Conjunto de instruções escritas para um computador.' },
+    { id: 5, number: 5, direction: 'across', row: 5, col: 1, answer: 'INTERNET', clue: 'Rede mundial que conecta computadores e dispositivos.' },
+    { id: 6, number: 6, direction: 'down', row: 5, col: 6, answer: 'NUVEM', clue: 'Forma de armazenar e acessar arquivos pela internet.' },
+    { id: 7, number: 7, direction: 'across', row: 8, col: 0, answer: 'ROBOT', clue: 'Máquina programável capaz de executar tarefas.' }
   ]
 };
 
