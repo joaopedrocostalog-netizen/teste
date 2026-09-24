@@ -18,6 +18,7 @@ let activeDirection = 'across';
 let elapsed = 0;
 let timerHandle = null;
 let finished = false;
+let gameMode = null;
 
 function keyFor(row, col) { return `${row}-${col}`; }
 
@@ -87,10 +88,7 @@ function selectWord(id, focusRow = null, focusCol = null) {
   const word = puzzle.words.find(w => w.id === id);
   activeDirection = word.direction;
   document.querySelectorAll('.cell').forEach(c => c.classList.remove('selected', 'active'));
-  getWordCells(word).forEach(({ row, col }) => {
-    const cell = getCell(row, col);
-    cell?.classList.add('selected');
-  });
+  getWordCells(word).forEach(({ row, col }) => getCell(row, col)?.classList.add('selected'));
   const activeCell = focusRow !== null ? getCell(focusRow, focusCol) : getCell(word.row, word.col);
   activeCell?.classList.add('active');
   document.getElementById('activeClueTitle').textContent = `${word.number}. ${word.clue}`;
@@ -115,9 +113,7 @@ function handleInput(event, row, col) {
   updateProgress();
 }
 
-function clearValidation(row, col) {
-  getCell(row, col)?.classList.remove('wrong', 'correct');
-}
+function clearValidation(row, col) { getCell(row, col)?.classList.remove('wrong', 'correct'); }
 
 function handleKeyDown(event, row, col) {
   if (event.key === 'Backspace' && !event.target.value) {
@@ -141,7 +137,7 @@ function moveAlongWord(row, col, delta, erase = false) {
   const next = cells[index + delta];
   if (next) {
     const input = getInput(next.row, next.col);
-    if (erase) input.value = '';
+    if (erase && input) input.value = '';
     input?.focus();
   }
 }
@@ -207,6 +203,7 @@ function formatTime(seconds) {
 
 function startTimer() {
   clearInterval(timerHandle);
+  if (gameMode !== 'timed') return;
   timerHandle = setInterval(() => {
     if (finished) return;
     elapsed += 1;
@@ -214,15 +211,32 @@ function startTimer() {
   }, 1000);
 }
 
+function setGameMode(mode) {
+  gameMode = mode;
+  elapsed = 0;
+  document.getElementById('timer').textContent = '00:00';
+  document.getElementById('timerCard').classList.toggle('hidden', mode !== 'timed');
+  document.getElementById('finalTime').classList.add('hidden');
+  document.getElementById('modeModal').classList.add('hidden');
+  resetBoard(false);
+  startTimer();
+}
+
 function finishGame() {
   if (finished) return;
   finished = true;
   clearInterval(timerHandle);
-  document.getElementById('finalTime').textContent = formatTime(elapsed);
+  const finalTime = document.getElementById('finalTime');
+  if (gameMode === 'timed') {
+    finalTime.textContent = formatTime(elapsed);
+    finalTime.classList.remove('hidden');
+  } else {
+    finalTime.classList.add('hidden');
+  }
   document.getElementById('modal').classList.remove('hidden');
 }
 
-function resetGame() {
+function resetBoard(restartTimer = true) {
   finished = false;
   elapsed = 0;
   document.getElementById('timer').textContent = '00:00';
@@ -232,7 +246,14 @@ function resetGame() {
   activeWordId = null;
   document.getElementById('activeClueTitle').textContent = 'Selecione uma palavra';
   updateProgress();
-  startTimer();
+  if (restartTimer) startTimer();
+}
+
+function resetGame() { resetBoard(true); }
+
+function changeMode() {
+  clearInterval(timerHandle);
+  document.getElementById('modeModal').classList.remove('hidden');
 }
 
 function setupTabs() {
@@ -251,9 +272,14 @@ buildGridData();
 renderGrid();
 renderClues();
 setupTabs();
-startTimer();
 updateProgress();
 
 document.getElementById('checkBtn').addEventListener('click', () => checkAnswers(true));
 document.getElementById('restartBtn').addEventListener('click', resetGame);
-document.getElementById('playAgainBtn').addEventListener('click', resetGame);
+document.getElementById('changeModeBtn').addEventListener('click', changeMode);
+document.getElementById('timedModeBtn').addEventListener('click', () => setGameMode('timed'));
+document.getElementById('untimedModeBtn').addEventListener('click', () => setGameMode('untimed'));
+document.getElementById('playAgainBtn').addEventListener('click', () => {
+  document.getElementById('modal').classList.add('hidden');
+  document.getElementById('modeModal').classList.remove('hidden');
+});
