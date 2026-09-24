@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Palavras Cruzadas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-orb orb-one"></div>
+  <div class="background-orb orb-two"></div>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">DESAFIO DO DIA</span>
+        <h1>Palavras Cruzadas</h1>
+        <p class="subtitle">Preencha a grade usando as dicas e complete o desafio.</p>
+      </div>
+
+      <div class="header-actions">
+        <div class="timer-card" aria-label="Tempo de jogo">
+          <span>Tempo</span>
+          <strong id="timer">00:00</strong>
+        </div>
+        <button id="restartBtn" class="btn btn-secondary" type="button">Reiniciar</button>
+      </div>
+    </header>
+
+    <section class="game-layout">
+      <div class="board-panel glass-panel">
+        <div class="board-toolbar">
+          <div>
+            <span class="section-label">TABULEIRO</span>
+            <h2 id="activeClueTitle">Selecione uma palavra</h2>
+          </div>
+          <span id="progressText" class="progress-pill">0 / 7</span>
+        </div>
+
+        <div id="crossword" class="crossword" aria-label="Grade de palavras cruzadas"></div>
+
+        <div class="board-footer">
+          <div class="legend">
+            <span><i class="legend-box selected"></i> selecionada</span>
+            <span><i class="legend-box correct"></i> correta</span>
+          </div>
+          <button id="checkBtn" class="btn btn-primary" type="button">Verificar respostas</button>
+        </div>
+      </div>
+
+      <aside class="clues-panel glass-panel">
+        <div class="clues-header">
+          <span class="section-label">DICAS</span>
+          <h2>Encontre as palavras</h2>
+        </div>
+
+        <div class="clue-tabs" role="tablist">
+          <button class="tab active" data-tab="across" type="button">Horizontais</button>
+          <button class="tab" data-tab="down" type="button">Verticais</button>
+        </div>
+
+        <div id="clueList" class="clue-list"></div>
+
+        <div class="help-card">
+          <strong>Como jogar</strong>
+          <p>Clique em uma casa para selecionar a palavra. Digite as letras e use as setas para navegar pela grade.</p>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <span>Palavras Cruzadas • feito para GitHub Pages</span>
+    </footer>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="success-icon">✓</div>
+      <span class="eyebrow">DESAFIO CONCLUÍDO</span>
+      <h2 id="modalTitle">Parabéns!</h2>
+      <p>Você completou todas as palavras corretamente.</p>
+      <strong id="finalTime" class="final-time">00:00</strong>
+      <button id="playAgainBtn" class="btn btn-primary" type="button">Jogar novamente</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
