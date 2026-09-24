@@ -23,10 +23,11 @@
       </div>
 
       <div class="header-actions">
-        <div class="timer-card" aria-label="Tempo de jogo">
+        <div id="timerCard" class="timer-card hidden" aria-label="Tempo de jogo">
           <span>Tempo</span>
           <strong id="timer">00:00</strong>
         </div>
+        <button id="changeModeBtn" class="btn btn-secondary" type="button">Trocar modo</button>
         <button id="restartBtn" class="btn btn-secondary" type="button">Reiniciar</button>
       </div>
     </header>
@@ -77,13 +78,33 @@
     </footer>
   </main>
 
+  <div id="modeModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modeTitle">
+    <div class="modal-card mode-card">
+      <span class="eyebrow">ESCOLHA COMO JOGAR</span>
+      <h2 id="modeTitle">Modo de jogo</h2>
+      <p>Escolha se deseja jogar acompanhando o tempo ou sem cronômetro.</p>
+      <div class="mode-options">
+        <button id="timedModeBtn" class="mode-option" type="button">
+          <span class="mode-icon">⏱</span>
+          <strong>Com tempo</strong>
+          <small>O cronômetro registra quanto você leva para concluir.</small>
+        </button>
+        <button id="untimedModeBtn" class="mode-option" type="button">
+          <span class="mode-icon">∞</span>
+          <strong>Sem tempo</strong>
+          <small>Jogue no seu ritmo, sem cronômetro ou duração final.</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-card">
       <div class="success-icon">✓</div>
       <span class="eyebrow">DESAFIO CONCLUÍDO</span>
       <h2 id="modalTitle">Parabéns!</h2>
       <p>Você completou todas as palavras corretamente.</p>
-      <strong id="finalTime" class="final-time">00:00</strong>
+      <strong id="finalTime" class="final-time hidden">00:00</strong>
       <button id="playAgainBtn" class="btn btn-primary" type="button">Jogar novamente</button>
     </div>
   </div>
